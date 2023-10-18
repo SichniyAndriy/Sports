@@ -35,9 +35,10 @@ class SportsListFragment : Fragment() {
     private val sportsViewModel: SportsViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         return FragmentSportsListBinding.inflate(inflater, container, false).root
     }
 
@@ -49,7 +50,7 @@ class SportsListFragment : Fragment() {
         // Connect the SlidingPaneLayout to the system back button.
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
-            SportsListOnBackPressedCallback(slidingPaneLayout)
+            SportsListOnBackPressedCallback(slidingPaneLayout),
         )
 
         // Initialize the adapter and set it to the RecyclerView.
@@ -69,14 +70,13 @@ class SportsListFragment : Fragment() {
 /**
  * Callback providing custom back navigation.
  */
-
-class SportsListOnBackPressedCallback(
-    private val slidingPaneLayout: SlidingPaneLayout
-) : OnBackPressedCallback(
-    // Set the default 'enabled' state to true only if it is slidable (i.e., the panes
-    // are overlapping) and open (i.e., the detail pane is visible).
-    slidingPaneLayout.isSlideable && slidingPaneLayout.isOpen
-), SlidingPaneLayout.PanelSlideListener {
+class SportsListOnBackPressedCallback(private val slidingPaneLayout: SlidingPaneLayout) :
+    OnBackPressedCallback(
+        // Set the default 'enabled' state to true only if it is slidable (i.e., the panes
+        // are overlapping) and open (i.e., the detail pane is visible).
+        slidingPaneLayout.isSlideable && slidingPaneLayout.isOpen,
+    ),
+    SlidingPaneLayout.PanelSlideListener {
 
     init {
         slidingPaneLayout.addPanelSlideListener(this)

@@ -33,9 +33,10 @@ class NewsDetailsFragment : Fragment() {
     private val sportsViewModel: SportsViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         return FragmentSportsNewsBinding.inflate(inflater, container, false).root
     }
 

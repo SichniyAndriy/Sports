@@ -34,7 +34,7 @@ class SportsAdapter(private val onItemClicked: (Sport) -> Unit) :
     class SportsViewHolder(private var binding: SportsListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(sport: Sport, context:Context) {
+        fun bind(sport: Sport, context: Context) {
             binding.title.text = context.getString(sport.titleResourceId)
             binding.subTitle.text = context.getString(sport.subTitleResourceId)
             // Load the images into the ImageView using the Coil library.
@@ -44,13 +44,15 @@ class SportsAdapter(private val onItemClicked: (Sport) -> Unit) :
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): SportsViewHolder {
         context = parent.context
         return SportsViewHolder(
             SportsListItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ),
         )
     }
 
@@ -65,10 +67,11 @@ class SportsAdapter(private val onItemClicked: (Sport) -> Unit) :
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Sport>() {
             override fun areItemsTheSame(oldItem: Sport, newItem: Sport): Boolean {
-                return (oldItem.id == newItem.id ||
+                return (
+                    oldItem.id == newItem.id ||
                         oldItem.titleResourceId == newItem.titleResourceId ||
                         oldItem.subTitleResourceId == newItem.subTitleResourceId
-                        )
+                    )
             }
 
             override fun areContentsTheSame(oldItem: Sport, newItem: Sport): Boolean {
